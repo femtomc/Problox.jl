@@ -30,7 +30,7 @@ Dict{Any,Any}(PyObject win => 0.64)
 You can, of course, use some of Julia's nice abstractions.
 
 ```julia
-# Little generator - generates worlds :)
+# Generates worlds :)
 @logic function generator(p, q)
     C = variable(:C);
     coin(:c1);
