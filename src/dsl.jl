@@ -31,51 +31,43 @@ function parse_body(body)
 end
 
 function _logic(expr)
-    @capture(expr, begin body__ end)
-    trans = map(body) do ex
-        if @capture(ex, begin body__; end)
-            length(body) == 1 || error("Parsing error at $body.")
-            parse_body(body[1])
-        else
-            error("Parsing error at $body.")
+    if @capture(expr, function name_(args__) body__ end)
+        trans = map(body) do ex
+            if @capture(ex, begin body__; end)
+                length(body) == 1 || error("Parsing error at $body.")
+                parse_body(body[1])
+            else
+                error("Parsing error at $body.")
+            end
         end
-    end
-    expr = quote 
-        sp = SimpleProgram()
-        $(trans...)
-        sp
-    end
-    return expr
-end
+        expr = quote 
+            function $name($(args...))
+                sp = SimpleProgram()
+                $(trans...)
+                sp
+            end
+        end
 
-function _logic(args, expr)
-    @capture(expr, begin body__ end)
-    trans = map(body) do ex
-        if @capture(ex, begin body__; end)
-            length(body) == 1 || error("Parsing error at $body.")
-            parse_body(body[1])
-        else
-            error("Parsing error at $body.")
+    elseif @capture(expr, begin body__ end)
+        trans = map(body) do ex
+            if @capture(ex, begin body__; end)
+                length(body) == 1 || error("Parsing error at $body.")
+                parse_body(body[1])
+            else
+                error("Parsing error at $body.")
+            end
         end
-    end
-    expr = quote 
-        $args -> begin
+        expr = quote 
             sp = SimpleProgram()
             $(trans...)
             sp
         end
     end
-    return expr
+    expr
 end
 
 macro logic(expr)
-    network = _logic(expr)
-    network = MacroTools.postwalk(rmlines ∘ unblock, network)
-    network
-end
-
-macro logic(args, expr)
-    generator = _logic(args, expr)
-    generator = MacroTools.postwalk(rmlines ∘ unblock, generator)
-    generator
+    new = _logic(expr)
+    new = MacroTools.postwalk(rmlines ∘ unblock, new)
+    esc(new)
 end

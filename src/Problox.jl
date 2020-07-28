@@ -48,8 +48,8 @@ end
 
 SimpleProgram() = pp.SimpleProgram()
 Var(str::String) =  pl.Var(str)
-var(s::String) = Var(String(s))
-var(s::Symbol) = Var(String(s))
+variable(s::String) = Var(String(s))
+variable(s::Symbol) = Var(String(s))
 Constant(str::String) =  pl.Constant(str)
 AnnotatedDisjunction(p::Array{PyObject}, q::PyObject) = pl.AnnotatedDisjunction(p, q)
 AnnotatedDisjunction(p::NTuple{N, PyObject}, q::PyObject) where N = pl.AnnotatedDisjunction([p...], q)
@@ -58,6 +58,6 @@ evaluate(p::PyObject) = problog.get_evaluatable().create_from(p).evaluate()
 
 include("dsl.jl")
 
-export @logic, SimpleProgram, Var, Constant, AnnotatedDisjunction, coin, heads, tails, win, query, evaluate
+export @logic, SimpleProgram, Var, Constant, AnnotatedDisjunction, coin, heads, tails, win, query, evaluate, variable
 
 end # module
