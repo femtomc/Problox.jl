@@ -13,4 +13,8 @@ using .Problox
     query(win);
 end
 
+net = generate(0.3, 0.5)
+ret = evaluate(net)
+println(ret)
+
 end # module
