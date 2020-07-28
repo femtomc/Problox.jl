@@ -2,8 +2,12 @@ module Problox
 
 using Jaynes
 using PyCall
+using Conda
 using MacroTools
 using MacroTools: @capture
+
+Conda.add("pip")
+pip = pyimport("pip")
 
 problog = pyimport("problog")
 pp = pyimport("problog.program")
