@@ -31,7 +31,7 @@ You can, of course, use some of Julia's nice abstractions.
 
 ```julia
 # Little generator - generates worlds :)
-generator = @logic (p, q) begin
+@logic function generator(p, q)
     C = var(:C);
     coin(:c1);
     coin(:c2);
@@ -41,7 +41,7 @@ generator = @logic (p, q) begin
 end
 ```
 
-Here's a world generator. This produces an anonymous function which produces worlds which you can evaluate with `evaluate`.
+Here's a world generator. This defines a function which produces worlds which you can evaluate with `evaluate`.
 
 If you want to work at a lower-level, there's a set of direct APIs for building programs.
 
