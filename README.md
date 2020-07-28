@@ -4,7 +4,7 @@ Here's the DSL in action:
 
 ```julia
 net = @logic begin
-    C = var(:C);
+    C = variable(:C);
     coin(:c1);
     coin(:c2);
     (0.4 :: heads(C), 0.6 :: tails(C)) :- coin(C);
@@ -32,7 +32,7 @@ You can, of course, use some of Julia's nice abstractions.
 ```julia
 # Little generator - generates worlds :)
 @logic function generator(p, q)
-    C = var(:C);
+    C = variable(:C);
     coin(:c1);
     coin(:c2);
     (p :: heads(C), q :: tails(C)) :- coin(C);
