@@ -7,7 +7,7 @@ using .Problox
 C = Var("C")
 p = SimpleProgram()
 p.add_fact(coin(Constant("c1")))
-p.add_fact(coin(Constant("c1")))
+p.add_fact(coin(Constant("c2")))
 p.add_clause(AnnotatedDisjunction([heads(C, p=0.4), tails(C, p=0.6)], coin(C)))
 p.add_clause(win << heads(C))
 p.add_fact(query(win))
@@ -35,7 +35,7 @@ generator = @logic (p, q) begin
     query(win);
 end
 
-net = generator(0.3, 0.5)
+net = generator(0.4, 0.6)
 
 # Evaluation offloads to the C engine through Python.
 println(evaluate(net))
