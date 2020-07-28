@@ -42,10 +42,6 @@ function term(str::String)
     return pl.Term(str)
 end
 
-coin, heads, tails, win, query = map(["coin", "heads", "tails", "win", "query"]) do t
-    term(t)
-end
-
 SimpleProgram() = pp.SimpleProgram()
 Var(str::String) =  pl.Var(str)
 variable(s::String) = Var(String(s))
@@ -58,6 +54,14 @@ evaluate(p::PyObject) = problog.get_evaluatable().create_from(p).evaluate()
 
 include("dsl.jl")
 
-export @logic, SimpleProgram, Var, Constant, AnnotatedDisjunction, coin, heads, tails, win, query, evaluate, variable
+# DSL.
+export @logic
+
+# Lower-level API.
+export SimpleProgram, Var, Constant, AnnotatedDisjunction, term
+
+# Convenience.
+query = term("query")
+export query, evaluate, variable
 
 end # module

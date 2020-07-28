@@ -3,6 +3,11 @@ module Simple
 include("../src/Problox.jl")
 using .Problox
 
+coin = term("coin")
+heads = term("heads")
+tails = term("tails")
+win = term("win")
+
 # Little generator - generates worlds :)
 @logic function generator(p, q)
     C = variable(:C);
