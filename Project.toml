@@ -5,13 +5,11 @@ version = "0.1.0"
 
 [deps]
 Conda = "8f4d0f93-b110-5947-807f-2305c1781a2d"
-Jaynes = "a2015381-cef8-4fe1-827c-95a77dd17ccf"
 MacroTools = "1914dd2f-81c6-5fcd-8719-6d5c9610ff09"
 PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
 
 [compat]
 Conda = "1.4"
-Jaynes = "0.1"
 MacroTools = "0.5"
 PyCall = "1.9"
 julia = "1"

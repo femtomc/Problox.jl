@@ -1,6 +1,5 @@
 module Problox
 
-using Jaynes
 using PyCall
 using Conda
 using MacroTools
