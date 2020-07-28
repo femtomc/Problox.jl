@@ -7,14 +7,35 @@ using MacroTools
 using MacroTools: @capture
 
 # Install ProbLog.
-cmd = `pip install problog`
-run(cmd)
+if PyCall.conda
+	Conda.add("pip")
+	pip = joinpath(Conda.BINDIR, "pip")
+	run(`$pip install problog`)
+else
+	try
+        pyimport("problog")
+        pyimport("problog.program")
+        pyimport("problog.logic")
+        pyimport("problog.tasks")
+        pyimport("problog.tasks.sample")
+	catch ee
+		typeof(ee) <: PyCall.PyError || rethrow(ee)
+		warn("""
+Python Dependencies not installed
+Please either:
+ - Rebuild PyCall to use Conda, by running in the julia REPL:
+    - `ENV[PYTHON]=""; Pkg.build("PyCall"); Pkg.build("Problox")`
+ - Or install the depencences, eg by running pip
+	- `pip install problog`
+	"""
+		)
+	end
+end
 
 problog = pyimport("problog")
 pp = pyimport("problog.program")
 pl = pyimport("problog.logic")
 pt = pyimport("problog.tasks")
-coin = pl.Term("coin")
 sample = pyimport("problog.tasks.sample")
 
 # User-defined terms.
