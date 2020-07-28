@@ -1,4 +1,4 @@
-`Problox.jl` is a small DSL for _probabilistic relational modeling_ which wraps `ProbLog` - a wonderful, well-supported library which extends `Prolog` with probabilistic constructs.
+`Problox.jl` is a small DSL for _probabilistic logic programming_ which wraps [ProbLog](https://dtai.cs.kuleuven.be/problog/) - a wonderful, well-supported library which extends [Prolog](https://en.wikipedia.org/wiki/Prolog) with probabilistic constructs.
 
 Here's the DSL in action:
 
@@ -43,7 +43,7 @@ end
 
 Here's a world generator. This defines a function which produces worlds which you can evaluate with `evaluate`.
 
-If you want to work at a lower-level, there's a set of direct APIs for building programs.
+If you want to work at a lower-level, there's a set of direct APIs through `PyCall` for building programs.
 
 ```julia
 # This is a simple program in the direct Python interfaces.
