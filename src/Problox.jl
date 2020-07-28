@@ -6,8 +6,9 @@ using Conda
 using MacroTools
 using MacroTools: @capture
 
-Conda.add("pip")
-pip = pyimport("pip")
+# Install ProbLog.
+cmd = `pip install problog`
+run(cmd)
 
 problog = pyimport("problog")
 pp = pyimport("problog.program")
