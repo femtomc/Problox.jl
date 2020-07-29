@@ -9,21 +9,27 @@ function parse_disjuncts(head)
     ret
 end
 
-function parse_call(call, name)
-    name isa QuoteNode && return quote sp.add_fact($call(Constant(String($name)))) end
-    return quote sp.add_fact($call($name)) end
+function parse_call(call, names)
+    names = map(names) do name
+        if name isa QuoteNode
+            quote Constant(String($name)) end
+        else
+            name
+        end
+    end
+    return quote sp.add_fact($call($(names...))) end
 end
 
 function parse_body(body)
-    if @capture(body, call_(name_))
-        return parse_call(call, name)
-
-    elseif @capture(body, head_ :- tail_)
+    if @capture(body, head_ :- tail_)
         disjuncts = parse_disjuncts(head)
         return quote sp.add_clause(AnnotatedDisjunction($disjuncts, $tail)) end
 
     elseif @capture(body, head_ << tail_)
         return quote sp.add_clause($head << $tail) end
+
+    elseif @capture(body, call_(names__))
+        return parse_call(call, names)
 
     else
         body
