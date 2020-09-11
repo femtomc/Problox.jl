@@ -62,6 +62,7 @@ export SimpleProgram, Var, Constant, AnnotatedDisjunction, term
 
 # Convenience.
 query = term("query")
-export query, evaluate, variable
+evidence = term("evidence")
+export query, evidence, evaluate, variable
 
 end # module
