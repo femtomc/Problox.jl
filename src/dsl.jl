@@ -36,7 +36,7 @@ function parse_body(body)
     end
 end
 
-function _logic(expr)
+function _problox(expr)
     if @capture(expr, function name_(args__) body__ end)
         trans = map(body) do ex
             if @capture(ex, begin body__; end)
@@ -72,8 +72,8 @@ function _logic(expr)
     expr
 end
 
-macro logic(expr)
-    new = _logic(expr)
+macro problox(expr)
+    new = _problox(expr)
     new = MacroTools.postwalk(rmlines ∘ unblock, new)
     esc(new)
 end

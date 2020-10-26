@@ -9,7 +9,7 @@ tails = term("tails")
 win = term("win")
 
 # Little generator - generates worlds :)
-@logic function generator(p, q)
+@problox function generator(p, q)
     C = variable(:C);
     coin(:c1);
     coin(:c2);

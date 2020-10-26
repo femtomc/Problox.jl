@@ -55,7 +55,7 @@ evaluate(p::PyObject) = problog.get_evaluatable().create_from(p).evaluate()
 include("dsl.jl")
 
 # DSL.
-export @logic
+export @problox
 
 # Lower-level API.
 export SimpleProgram, Var, Constant, AnnotatedDisjunction, term

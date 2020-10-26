@@ -3,7 +3,7 @@
 Here's the DSL in action:
 
 ```julia
-net = @logic begin
+net = @problox begin
     C = variable(:C);
     coin(:c1);
     coin(:c2);
@@ -31,7 +31,7 @@ You can, of course, use some of Julia's nice abstractions.
 
 ```julia
 # Generates worlds :)
-@logic function generator(p, q)
+@problox function generator(p, q)
     C = variable(:C);
     coin(:c1);
     coin(:c2);
